@@ -3,8 +3,8 @@ import numpy as np
 import os
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-
-SAVE_DIR = os.path.join(os.path.dirname(current_dir), 'results')
+SAVE_DIR = os.path.join(current_dir, 'plots')
+os.makedirs(SAVE_DIR, exist_ok=True)
 
 def plot_box_diagrams(data, system_name, targets):
     n = len(targets)

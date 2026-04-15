@@ -30,9 +30,6 @@ An interactive tool for optimizing complex system designs to achieve specified a
   - [Support](#support)
     - [Getting Help](#getting-help)
     - [Common Issues](#common-issues)
-  - [Contributing](#contributing)
-    - [Areas for Contribution](#areas-for-contribution)
-  - [License](#license)
 
 ## Overview
 
@@ -293,40 +290,6 @@ Hybrid evolutionary algorithm combining genetic algorithms with memetic structur
 
 **Problem**: Only infeasible solutions found
 - **Solution**: Increase `max_gen`, `pop_size`, or decrease availability target
-
-## Contributing
-
-We welcome contributions! To contribute:
-
-1. **Fork the repository** and create a feature branch
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-2. **Make changes** while maintaining code style
-   - Follow PEP 8 conventions
-   - Add comments for complex logic
-   - Keep functions focused and modular
-
-3. **Test thoroughly**
-   - Run `main.py` to verify benchmarking works
-   - Test the Streamlit app with various parameter combinations
-   - Ensure visualizations generate correctly
-
-4. **Submit a pull request** with a clear description of changes
-
-### Areas for Contribution
-
-- **New algorithms**: Implement additional metaheuristics (PSO, GA, ACO, etc.)
-- **System topologies**: Add new reliability configurations
-- **Performance**: Optimize slow code sections or parallelize runs
-- **Documentation**: Improve docstrings and examples
-- **Testing**: Add unit tests and validation checks
-- **UI enhancements**: Improve Streamlit interface and responsiveness
-
-## License
-
-This project is provided as-is for research and educational purposes.
 
 ---
 
