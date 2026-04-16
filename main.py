@@ -1,8 +1,10 @@
 import numpy as np
 import copy
+import pandas as pd 
 
 from backend.core_math import calc_subsystem_availability, evaluate_solution
 from backend.algorithms import optimize_de, optimize_mrfo, optimize_sfla
+from backend.mo_algorithms import optimize_mode 
 
 from utils.visualise import generate_all_visualisations
 
@@ -88,8 +90,43 @@ def run_benchmark(num_runs=10):
             print(f"  {'─'*106}")
             
         print(f"\n  Generating and saving visualisations for {cfg['name']}...")
-        generate_all_visualisations(plot_data, cfg['name'])
+        try:
+            generate_all_visualisations(plot_data, cfg['name'])
+        except Exception as e:
+            print(f"  [Visualisation Skipped] {e}")
+
+def run_mo_benchmark():
+    np.random.seed(42)
+    systems = [
+        {'name': 'Complex bridge network system', 'm': 5,  'type': 'bridge'},
+        {'name': 'Parallel-series system', 'm': 10, 'type': 'series_parallel'},
+    ]
+
+    print(f"\n{'='*110}")
+    print(" RRAP MULTI-OBJECTIVE BENCHMARK (Future Work Extension)")
+    print(" Generating Pareto Fronts using Multi-Objective DE (MODE)")
+    print(f"{'='*110}")
+
+    for cfg in systems:
+        print(f"\n>>> SYSTEM: {cfg['name'].upper()}  (m = {cfg['m']})")
+        print("  Running MODE algorithm... please wait.")
+        
+        pareto_front = optimize_mode(cfg['m'], cfg['type'], pop_size=100, max_gen=200)
+        
+        print(f"\n  Found {len(pareto_front)} realistic non-dominated solutions forming the Pareto Front:")
+        
+        df_pareto = pd.DataFrame(pareto_front)
+        df_pareto.rename(columns={'n': 'Redundancy (n)', 'r': 'Repair (r)', 'cost': 'Cost', 'avail': 'Availability'}, inplace=True)
+        print(df_pareto.to_string(index=False))
+        print(f"  {'─'*106}")
 
 if __name__ == "__main__":
+    import sys
+    
     verify_availability_formulas()
-    run_benchmark(num_runs=10)
+    
+    if len(sys.argv) > 1 and sys.argv[1] == '--mo':
+        run_mo_benchmark()
+    else:
+        run_benchmark(num_runs=10)
+        print("\nTip: Run with 'python main.py --mo' to execute the new Multi-Objective benchmark.")
