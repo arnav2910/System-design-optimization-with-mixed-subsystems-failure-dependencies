@@ -1,6 +1,6 @@
 # System Reliability Optimization
 
-An interactive tool for optimizing complex system designs to achieve specified availability targets while minimizing cost. Compares three state-of-the-art metaheuristic algorithms: Differential Evolution (DE), Manta Ray Foraging Optimization (MRFO), and Shuffled Frog Leaping Algorithm (SFLA).
+An interactive tool for optimizing complex system designs to achieve specified availability targets while minimizing cost. Compares four state-of-the-art metaheuristic algorithms: Differential Evolution (DE), Manta Ray Foraging Optimization (MRFO), Shuffled Frog Leaping Algorithm (SFLA), and Multi-Objective Differential Evolution (MODE).
 
 **[Try the Live Demo](https://systemdesignoptimization.streamlit.app/)** | **[View on GitHub](https://github.com/arnav2910/System-design-optimization-with-mixed-subsystems-failure-dependencies)**
 
@@ -27,6 +27,7 @@ An interactive tool for optimizing complex system designs to achieve specified a
     - [Differential Evolution (DE)](#differential-evolution-de)
     - [Manta Ray Foraging Optimization (MRFO)](#manta-ray-foraging-optimization-mrfo)
     - [Shuffled Frog Leaping Algorithm (SFLA)](#shuffled-frog-leaping-algorithm-sfla)
+    - [Multi-Objective Differential Evolution (MODE)](#multi-objective-differential-evolution-mode)
   - [Support](#support)
     - [Getting Help](#getting-help)
     - [Common Issues](#common-issues)
@@ -55,10 +56,11 @@ The system optimization tool addresses the Redundancy Allocation Problem (RAP) w
 - **Complex Bridge Network**: 5-subsystem configuration with bridge topology
 - **Series-Parallel System**: 10-subsystem configuration combining series and parallel arrangements
 
-**Three Optimization Algorithms**
+**Four Optimization Algorithms**
 - **Differential Evolution (DE)**: Population-based stochastic optimization
 - **Manta Ray Foraging Optimization (MRFO)**: Bio-inspired algorithm mimicking manta ray behavior
 - **Shuffled Frog Leaping Algorithm (SFLA)**: Hybrid evolutionary approach with memetic structure
+- **Multi-Objective Differential Evolution (MODE)**: Explores the Pareto-optimal front for cost vs. availability trade-offs
 
 **Comprehensive Analysis**
 - Multi-run benchmarking with statistical comparison
@@ -218,6 +220,7 @@ opti-final/
 | Module          | Purpose                                                                                  |
 | --------------- | ---------------------------------------------------------------------------------------- |
 | `algorithms.py` | Implements DE, MRFO, and SFLA optimization algorithms                                    |
+| `mo_algorithms.py` | Implements Multi-Objective Differential Evolution (MODE) for Pareto front exploration |
 | `core_math.py`  | Calculates subsystem availability, system availability, and objective function penalties |
 | `data.py`       | Stores system topology definitions and parameter ranges                                  |
 | `visualise.py`  | Generates box plots and convergence curves                                               |
@@ -270,6 +273,14 @@ Hybrid evolutionary algorithm combining genetic algorithms with memetic structur
 - Periodic shuffling and reorganization
 
 **Best for**: Avoiding local optima through population diversity
+
+### Multi-Objective Differential Evolution (MODE)
+
+Extracts the Pareto-optimal front optimizing for both constraints simultaneously:
+- Minimizes cost while maximizing availability natively.
+- Identifies the trade-off curve rather than a single optimal solution based on penalty factors.
+
+**Best for**: Decision-making where the exact availability target vs budget is flexible and trade-offs need to be analyzed.
 
 ## Support
 
